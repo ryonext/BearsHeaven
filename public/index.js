@@ -128,6 +128,10 @@ window.onload = function(){
               player.y_prev = player.y;
           }
         }
+//        //Aボタン
+//        if (game.input.a){
+//          player.jump();
+//        }
         //上
         if (game.input.up){
           player.jump();
