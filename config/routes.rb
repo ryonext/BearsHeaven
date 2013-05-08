@@ -1,4 +1,6 @@
 BearsHeavenRails::Application.routes.draw do
+  resources :games, :only => [:new]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

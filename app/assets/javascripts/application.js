@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require enchant
+//= require ui.enchant
 //= require_tree .
