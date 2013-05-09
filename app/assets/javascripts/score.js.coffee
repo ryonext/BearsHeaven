@@ -1,6 +1,16 @@
 window.sendScore = (score, difficulty) ->
-  console.log(score)
-  console.log(difficulty)
+  $("#confirmDialog").dialog
+    bgiframe: true,
+    autoOpen: true,
+    width: 300,
+    modal: true,
+    buttons: {
+      'OK': ->
+        postScore(score, difficulty, $("#name").val())
+        $(this).dialog('close')
+    }
+  
+postScore = (score, difficulty, name) ->
   $.ajax
     url: "/games",
     type: 'POST',
@@ -8,8 +18,8 @@ window.sendScore = (score, difficulty) ->
     timeout: 1000,
     data: {
       score: {
-        name: 'hoge',
-        point: score,
+        name:       name,
+        point:      score,
         difficulty: difficulty,
       }
     }
