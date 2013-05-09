@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require enchant
 //= require ui.enchant
+//= require score
+//= require games
 //= require_tree .

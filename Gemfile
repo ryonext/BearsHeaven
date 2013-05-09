@@ -11,6 +11,8 @@ end
 
 group :development, :test do 
   gem 'sqlite3'
+  gem 'pry-rails'
+  gem 'pry-debugger'
 end
 
 # Gems used only for assets and not required

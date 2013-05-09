@@ -100,11 +100,17 @@ window.onload = ->
     player.y_prev = player.y
     player.F = PLAYER_JUMP_HEIGHT
     enemy_create_balance = ENEMY_CREATE
+    
+    #ゲームオーバーフラグ
+    gameOver = false
     # ゲーム毎フレームの処理
     game.rootScene.addEventListener Event.ENTER_FRAME, ->
       #ヤラレチャッタ？
       if player.status is STATUS_CRY
-        if player.y > CHARACTER_Y
+        if player.y > CHARACTER_Y && gameOver is false
+          gameOver = true
+          sendScore(game.score, difficult.text)
+
           retry_btn = new Label(64, 64)
           retry_btn.x = 70
           retry_btn.y = 100
