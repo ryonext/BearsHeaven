@@ -25,4 +25,7 @@ postScore = (score, difficulty, name, magnification) ->
       }
     }
     success: ->
-      alert "success"
+      $.notifyBar
+        html: "success!",
+        delay: 2000,
+        animationSpeed: "normal"
