@@ -1,0 +1,16 @@
+%h1 Score
+
+%table
+  %th rank
+  %th name
+  %th score
+  %th difficulty
+  %th max_magnification
+  - @scores.each_with_index do |s, i|
+    %tr
+      %td= i+1
+      %td= s.name
+      %td= s.point
+      %td= s.difficulty
+      %td= s.magnification
+
