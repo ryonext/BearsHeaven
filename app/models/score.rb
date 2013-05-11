@@ -1,3 +1,3 @@
 class Score < ActiveRecord::Base
-  attr_accessible :difficulty, :levarage, :name, :point
+  attr_accessible :difficulty, :magnification, :name, :point
 end

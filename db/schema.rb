@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(:version => 20130508140917) do
   create_table "scores", :force => true do |t|
     t.string   "name"
     t.integer  "point"
-    t.integer  "levarage"
+    t.integer  "magnification"
     t.string   "difficulty"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

@@ -3,7 +3,7 @@ class CreateScores < ActiveRecord::Migration
     create_table :scores do |t|
       t.string :name
       t.integer :point
-      t.integer :levarage
+      t.integer :magnification
       t.string :difficulty
 
       t.timestamps

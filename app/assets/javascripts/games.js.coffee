@@ -41,7 +41,8 @@ window.onload = ->
   game = new Game(SCREEN_X, SCREEN_Y)
   game.fps = 16
   game.score = 0
-  game.score_revarage = 1
+  game.score_magnification = 1
+  game.max_magnification = 1
   game.tick = 0
   #画像の読み込み
   game.preload "http://enchantjs.com/assets/images/space3.gif", "http://enchantjs.com/assets/images/map0.gif", "http://enchantjs.com/assets/images/icon0.gif"
@@ -89,10 +90,10 @@ window.onload = ->
     difficult.text = "かんたん"
     game.rootScene.addChild difficult
     #倍率ラベル
-    revarage_label = new Label(16, 16)
-    revarage_label.x = 200
-    revarage_label.text = "スコア倍率：" + game.score_revarage
-    game.rootScene.addChild revarage_label
+    magnification_label = new Label(16, 16)
+    magnification_label.x = 200
+    magnification_label.text = "スコア倍率：" + game.score_magnification
+    game.rootScene.addChild magnification_label
     
     #プレイヤークマ
     player = new Bear(0, 160 - 16, CHARACTER_Y, 1)
@@ -109,7 +110,7 @@ window.onload = ->
       if player.status is STATUS_CRY
         if player.y > CHARACTER_Y && gameOver is false
           gameOver = true
-          sendScore(game.score, difficult.text)
+          sendScore(game.score, difficult.text, game.max_magnification)
 
           retry_btn = new Label(64, 64)
           retry_btn.x = 70
@@ -186,7 +187,7 @@ window.onload = ->
       game.tick = 0  if game.tick is 1000000
       difficult.text = dif_text
       scoreboard.text = game.score
-      revarage_label.text = "スコア倍率：" + game.score_revarage
+      magnification_label.text = "スコア倍率：" + game.score_magnification
 
 
   game.start()
@@ -317,12 +318,13 @@ Bear = enchant.Class.create(enchant.Sprite,
     #退場したキャラのデータを削除する
     @go_out = ->
       if @y > SCREEN_Y or @x > SCREEN_X or @x < -10
-        game.score += Math.round(1 * game.score_revarage)
+        game.score += Math.round(1 * game.score_magnification)
         if @status is STATUS_SHOOT
-          game.score += Math.round(9 * game.score_revarage)
-          game.score_revarage = Math.round(game.score_revarage * 1.5)
+          game.score += Math.round(9 * game.score_magnification)
+          game.score_magnification = Math.round(game.score_magnification * 1.5)
+          game.max_magnification = game.score_magnification if game.max_magnification < game.score_magnification
         else
-          game.score_revarage = 1
+          game.score_magnification = 1
         # キャラデータの削除
         game.rootScene.removeChild this
         delete this

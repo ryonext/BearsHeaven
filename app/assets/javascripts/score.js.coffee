@@ -1,4 +1,4 @@
-window.sendScore = (score, difficulty) ->
+window.sendScore = (score, difficulty, magnification) ->
   $("#confirmDialog").dialog
     bgiframe: true,
     autoOpen: true,
@@ -6,11 +6,11 @@ window.sendScore = (score, difficulty) ->
     modal: true,
     buttons: {
       'OK': ->
-        postScore(score, difficulty, $("#name").val())
+        postScore(score, difficulty, $("#name").val(), magnification)
         $(this).dialog('close')
     }
   
-postScore = (score, difficulty, name) ->
+postScore = (score, difficulty, name, magnification) ->
   $.ajax
     url: "/games",
     type: 'POST',
@@ -21,6 +21,7 @@ postScore = (score, difficulty, name) ->
         name:       name,
         point:      score,
         difficulty: difficulty,
+        magnification: magnification
       }
     }
     success: ->
