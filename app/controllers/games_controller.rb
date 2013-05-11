@@ -7,4 +7,8 @@ class GamesController < ApplicationController
     score.save!
     render json: {status: true}
   end
+
+  def index
+    @scores = Score.order("point desc").limit(10)
+  end
 end

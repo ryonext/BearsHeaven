@@ -1,7 +1,7 @@
 BearsHeavenRails::Application.routes.draw do
   get "welcome/index"
 
-  resources :games, :only => [:new, :create]
+  resources :games, :only => [:new, :create, :index]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
