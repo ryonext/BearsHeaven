@@ -80,19 +80,22 @@ window.onload = ->
       player.jump()
 
     #スコア
-    scoreboard = new Label(16, 16)
+    scoreboard = createLabelWithFont(16, 16, 14)
     scoreboard.x = 100
+    scoreboard.y = 5
     scoreboard.text = game.score
     game.rootScene.addChild scoreboard
     #難易度ラベル
-    difficult = new Label(16, 16)
-    difficult.x = 0
+    difficult = createLabelWithFont(16, 16, 14)
+    difficult.x = 10
+    difficult.y = 5
     difficult.text = "かんたん"
     game.rootScene.addChild difficult
     #倍率ラベル
-    magnification_label = new Label(16, 16)
+    magnification_label = createLabelWithFont(16, 16, 14)
     magnification_label.x = 200
-    magnification_label.text = "スコア倍率：" + game.score_magnification
+    magnification_label.y = 5
+    magnification_label.text = "X" + game.score_magnification
     game.rootScene.addChild magnification_label
     
     #プレイヤークマ
@@ -112,12 +115,11 @@ window.onload = ->
           gameOver = true
           sendScore(game.score, difficult.text, game.max_magnification)
 
-          retry_btn = new Label(64, 64)
+          retry_btn = createLabelWithFont(64, 64)
           retry_btn.x = 70
           retry_btn.y = 100
           retry_btn.color = "#ffFF00"
-          retry_btn.font = "24px monospace"
-          retry_btn.text = "もう一度プレイする"
+          retry_btn.text = "Play again"
           game.rootScene.addChild retry_btn
           retry_btn.addEventListener Event.TOUCH_START, ->
             location.reload()
@@ -187,7 +189,7 @@ window.onload = ->
       game.tick = 0  if game.tick is 1000000
       difficult.text = dif_text
       scoreboard.text = game.score
-      magnification_label.text = "スコア倍率：" + game.score_magnification
+      magnification_label.text = "X" + game.score_magnification
 
 
   game.start()
@@ -336,3 +338,8 @@ Bear = enchant.Class.create(enchant.Sprite,
       @y_prev = y_temp
       @F = -1
 )
+
+createLabelWithFont = (x, y, fontSize = 24) ->
+  label = new Label(x, y)
+  label.font = "#{fontSize}px game_font"
+  label
