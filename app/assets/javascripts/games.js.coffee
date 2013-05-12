@@ -94,7 +94,7 @@ window.onload = ->
     magnification_label = createLabelWithFont(16, 16, 14)
     magnification_label.x = 200
     magnification_label.y = 5
-    magnification_label.text = "X" + game.score_magnification
+    magnification_label.text = "x" + game.score_magnification
     game.rootScene.addChild magnification_label
     
     #プレイヤークマ
@@ -113,15 +113,22 @@ window.onload = ->
         if player.y > CHARACTER_Y && gameOver is false
           gameOver = true
           sendScore(game.score, difficult.text, game.max_magnification)
-
-          retry_btn = createLabelWithFont(64, 64)
-          retry_btn.x = 70
-          retry_btn.y = 100
-          retry_btn.color = "#ffFF00"
+          retry_btn = enchant.ui.Button()
           retry_btn.text = "Play again"
+          retry_btn.x = 100
+          retry_btn.y = 50
+          retry_btn.color = "#ffFF00"
           game.rootScene.addChild retry_btn
           retry_btn.addEventListener Event.TOUCH_START, ->
             location.reload()
+          scoreBtn = enchant.ui.Button()
+          scoreBtn.text = "Watch score"
+          scoreBtn.x = 100
+          scoreBtn.y = 100
+          scoreBtn.color = "#ffFF00"
+          game.rootScene.addChild scoreBtn
+          scoreBtn.addEventListener Event.TOUCH_START, ->
+            location.href = "./"
 
         return
       #ジャンプ中
@@ -194,7 +201,7 @@ window.onload = ->
       game.tick = 0  if game.tick is 1000000
       difficult.text = dif_text
       scoreboard.text = game.score
-      magnification_label.text = "X" + game.score_magnification
+      magnification_label.text = "x" + game.score_magnification
 
 
   game.start()
@@ -346,5 +353,5 @@ Bear = enchant.Class.create(enchant.Sprite,
 
 createLabelWithFont = (x, y, fontSize = 24) ->
   label = new Label(x, y)
-  label.font = "#{fontSize}px game_font"
+  label.font = "#{fontSize}px 'Monaco', 'cursive', 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo','ＭＳ Ｐゴシック','MS PGothic','sans-serif'"
   label
