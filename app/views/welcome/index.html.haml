@@ -1,5 +1,54 @@
-%h1 BearsHeaven
-%h2 Contents
+%h2 Welcome
+%h3 Contents
 %ul
   %li= link_to "play game", new_game_path
   %li= link_to "show score", games_path 
+%h3 Tutorial
+%h4 how to play
+%p=image_tag 'move.png'
+%p=image_tag 'jump.png'
+
+%p or use cursor key on keyboard.
+
+%h4 evade
+
+=image_tag 'evade.png'
+
+%h4 attack
+
+=image_tag 'attack.png'
+
+%p score up!
+
+=image_tag 'score.png'
+
+%h4 increase difficulty
+%p very easy
+%p= image_tag 'veryeasy.png'
+%p easy
+%p= image_tag 'easy.png'
+%p normal
+%p= image_tag 'normal.png'
+%p hard
+%p= image_tag 'hard.png'
+%p very hard
+%p= image_tag 'veryhard.png'
+
+%h4 ememy
+%table
+  %tr
+    %td
+      #bear
+    %td= image_tag 'bear.png'
+  %tr
+    %td
+      #polar
+    %td= image_tag 'polar.png'
+  %tr
+    %td
+      #space
+    %td= image_tag 'space.png'
+  %tr
+    %td
+      #board
+    %td= image_tag 'board.png'
