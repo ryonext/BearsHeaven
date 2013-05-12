@@ -9,8 +9,8 @@ create_enemy = ->
   bear = new Bear(type, ENEMY_APPEAR_X, CHARACTER_Y, speed)
 # ゲームバランスに関する設定値
 #やられ判定。これを大きくすれば詐欺判定。小さくすれば弾幕シューティング的判定に・・・。
-#var YARARE_HANTEI = 0; //無敵モード
 YARARE_HANTEI = 5
+#YARARE_HANTEI = 0# //無敵モード
 #敵の出現間隔。この数字を小さくすれば無理ゲー。大きくすればヌルゲーに。というのを、敵の回避数に応じて頻度を増やしていくのを思いついた
 ENEMY_CREATE = 100
 #敵の最大速度
@@ -50,7 +50,6 @@ window.onload = ->
   game.onload = ->
     # 背景
     bg = new Sprite(SCREEN_X, SCREEN_Y)
-    bg.backgroundColor = "rgb(0, 200, 255)"
     matip = game.assets["http://enchantjs.com/assets/images/map0.gif"]
     surface = new Surface(SCREEN_X, SCREEN_Y)
     i = 0
@@ -80,19 +79,22 @@ window.onload = ->
       player.jump()
 
     #スコア
-    scoreboard = new Label(16, 16)
+    scoreboard = createLabelWithFont(16, 16, 14)
     scoreboard.x = 100
+    scoreboard.y = 5
     scoreboard.text = game.score
     game.rootScene.addChild scoreboard
     #難易度ラベル
-    difficult = new Label(16, 16)
-    difficult.x = 0
+    difficult = createLabelWithFont(16, 16, 14)
+    difficult.x = 10
+    difficult.y = 5
     difficult.text = "かんたん"
     game.rootScene.addChild difficult
     #倍率ラベル
-    magnification_label = new Label(16, 16)
+    magnification_label = createLabelWithFont(16, 16, 14)
     magnification_label.x = 200
-    magnification_label.text = "スコア倍率：" + game.score_magnification
+    magnification_label.y = 5
+    magnification_label.text = "X" + game.score_magnification
     game.rootScene.addChild magnification_label
     
     #プレイヤークマ
@@ -112,12 +114,11 @@ window.onload = ->
           gameOver = true
           sendScore(game.score, difficult.text, game.max_magnification)
 
-          retry_btn = new Label(64, 64)
+          retry_btn = createLabelWithFont(64, 64)
           retry_btn.x = 70
           retry_btn.y = 100
           retry_btn.color = "#ffFF00"
-          retry_btn.font = "24px monospace"
-          retry_btn.text = "もう一度プレイする"
+          retry_btn.text = "Play again"
           game.rootScene.addChild retry_btn
           retry_btn.addEventListener Event.TOUCH_START, ->
             location.reload()
@@ -162,22 +163,28 @@ window.onload = ->
         enemy_create_temp = 15
         dif_text = "Very Hard"
         difficult.color = "#ff0000"
+        bg.backgroundColor = "rgb(0, 30, 67)"
       if enemy_create_balance > 30
         enemy_create_temp = 30
         dif_text = "Hard"
         difficult.color = "#cc0033"
+        bg.backgroundColor = "rgb(240, 30, 40)"
       if enemy_create_balance > 50
         enemy_create_temp = 50
         dif_text = "Normal"
         difficult.color = "#990077"
+        bg.backgroundColor = "rgb(0, 200, 255)"
       if enemy_create_balance > 70
         enemy_create_temp = 60
         dif_text = "Easy"
         difficult.color = "#6600BB"
+        bg.backgroundColor = "rgb(100, 230, 255)"
       if enemy_create_balance > 90
         enemy_create_temp = 80
         dif_text = "Very Easy"
         difficult.color = "#3300FF"
+        bg.backgroundColor = "rgb(200, 230, 255)"
+        
       if (game.tick % enemy_create_temp) is 0
         # 指定のフレームごとに敵作る
         create_enemy()
@@ -187,7 +194,7 @@ window.onload = ->
       game.tick = 0  if game.tick is 1000000
       difficult.text = dif_text
       scoreboard.text = game.score
-      magnification_label.text = "スコア倍率：" + game.score_magnification
+      magnification_label.text = "X" + game.score_magnification
 
 
   game.start()
@@ -336,3 +343,8 @@ Bear = enchant.Class.create(enchant.Sprite,
       @y_prev = y_temp
       @F = -1
 )
+
+createLabelWithFont = (x, y, fontSize = 24) ->
+  label = new Label(x, y)
+  label.font = "#{fontSize}px game_font"
+  label

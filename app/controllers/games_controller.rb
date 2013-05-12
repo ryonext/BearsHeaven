@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   def new
+    render :layout => false
   end
 
   def create
