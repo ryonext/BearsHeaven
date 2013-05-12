@@ -353,5 +353,5 @@ Bear = enchant.Class.create(enchant.Sprite,
 
 createLabelWithFont = (x, y, fontSize = 24) ->
   label = new Label(x, y)
-  label.font = "#{fontSize}px game_font"
+  label.font = "#{fontSize}px 'Monaco', 'cursive', 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo','ＭＳ Ｐゴシック','MS PGothic','sans-serif'"
   label
