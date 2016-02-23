@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-ruby "2.3.0"
+
+ruby "2.2.4"
 
 gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
@@ -9,10 +10,9 @@ group :production do
   gem 'pg'
 end
 
-group :development, :test do 
+group :development, :test do
   gem 'sqlite3'
   gem 'pry-rails'
-  gem 'pry-debugger'
 end
 
 # Gems used only for assets and not required
